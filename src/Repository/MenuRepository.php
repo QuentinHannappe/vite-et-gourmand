@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Menu;
+use App\Data\SearchData;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +17,36 @@ class MenuRepository extends ServiceEntityRepository
         parent::__construct($registry, Menu::class);
     }
 
-    //    /**
-    //     * @return Menu[] Returns an array of Menu objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('m.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+  public function findSearch(SearchData $search): array
+{
+    $query = $this->createQueryBuilder('m');
 
-    //    public function findOneBySomeField($value): ?Menu
-    //    {
-    //        return $this->createQueryBuilder('m')
-    //            ->andWhere('m.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    if (!empty($search->theme)) {
+        $query->andWhere('m.theme IN (:theme)')
+              ->setParameter('theme', $search->theme);
+    }
+
+    if (!empty($search->regime)) {
+    $query->join('m.regimes', 'r')
+          ->andWhere('r.id IN (:regime)')
+          ->setParameter('regime', $search->regime);
+}
+
+    if (!empty($search->min)) {
+        $query->andWhere('m.prix_par_personne >= :min')
+              ->setParameter('min', $search->min);
+    }
+
+    if (!empty($search->max)) {
+        $query->andWhere('m.prix_par_personne <= :max')
+              ->setParameter('max', $search->max);
+    }
+
+    if (!empty($search->minPersonnes)) {
+        $query->andWhere('m.personnes_min >= :minPersonnes')
+              ->setParameter('minPersonnes', $search->minPersonnes);
+    }
+
+    return $query->getQuery()->getResult();
+}  
 }

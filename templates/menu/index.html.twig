@@ -1,364 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MenuController!{% endblock %}
+{% block title %}Nos Menus - Vite & Gourmand{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<section class="section">
+    <div class="container section-title">
+        <p><span>Découvrez</span> <span class="description-title">Nos Menus</span></p>
+    </div>
 
-<!-- Menu Section -->
-    <section id="menu" class="menu section">
 
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
+{{ form_start(form) }}
+<div class="container text-left">
+ <div class="row">
+    <div class="col-4">
+    {{ form_row(form.theme) }}
+    </div>
 
-        <p><span>Nos</span> <span class="description-title">Menus</span></p>
-      </div><!-- End Section Title -->
+    <div class="col-4">
+    {{ form_row(form.regime) }}
+    </div>
+    
+    <div class="col-4">
+    {{ form_row(form.min) }}
+    {{ form_row(form.max) }}
+    {{ form_row(form.minPersonnes) }}
+    </div>
+    </div>
+{{ form_end(form) }}
+</div>
 
-      <div class="container">
+</div>
 
-        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+    <div class="container">
+        <div class="row gy-4" id="menus-container">
+            {% for menu in menus %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 p-3">
 
-          <li class="nav-item">
-            <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-starters">
-              <h4>Noël</h4>
-            </a>
-          </li><!-- End tab nav item -->
+<div id="carousel-{{ menu.id }}" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for plat in menu.plats %}
+        <div class="carousel-item {% if loop.first %}active{% endif %}">
+            <img src="{{ asset(plat.photo) }}" class="d-block w-100" alt="{{ plat.titre }}" style="height: 300px; object-fit: contain;">
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ menu.id }}" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ menu.id }}" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
 
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-breakfast">
-              <h4>Pâques</h4>
-            </a><!-- End tab nav item -->
+    <div class="card-body">
+       <h4 class="card-title">{{ menu.titre }}</h4>
+       <p class="card-text">{{ menu.description }}</p>
+       <p><strong>Prix :</strong> {{ menu.prixParPersonne }}€ / personne</p>
+       <p><strong>Minimum :</strong> {{ menu.personnesMin }} personnes</p>
+       <a href="#" class="btn-getstarted">Voir le détail</a>
+    </div>
+     </div>
+      </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</section>
+{% endblock %}
 
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-lunch">
-              <h4>classiques</h4>
-            </a>
-          </li><!-- End tab nav item -->
-
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-dinner">
-              <h4>Evénements</h4>
-            </a>
-          </li><!-- End tab nav item -->
-
-        </ul>
-
-        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
-
-          <div class="tab-pane fade active show" id="menu-starters">
-
-            <div class="tab-header text-center">
-              <p>Menus de</p>
-              <h3>Noël</h3>
-            </div>
-
-            <div class="row gy-5">
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-1.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-1.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Noël 1</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €5.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-2.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-2.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Noël 2</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €14.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-3.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-3.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Noël 3</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €8.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-4.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-4.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Noël 4</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-5.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-5.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Noël 5</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-6.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-6.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Noël 6</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €9.95
-                </p>
-              </div><!-- Menu Item -->
-
-            </div>
-          </div><!-- End Starter Menu Content -->
-
-          <div class="tab-pane fade" id="menu-breakfast">
-
-            <div class="tab-header text-center">
-              <p>Menus de</p>
-              <h3>Pâques</h3>
-            </div>
-
-            <div class="row gy-5">
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-1.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-1.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €5.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-2.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-2.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Aut Luia</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €14.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-3.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-3.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Est Eligendi</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €8.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-4.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-4.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-5.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-5.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-6.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-6.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Laboriosam Direva</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €9.95
-                </p>
-              </div><!-- Menu Item -->
-
-            </div>
-          </div><!-- End Breakfast Menu Content -->
-
-          <div class="tab-pane fade" id="menu-lunch">
-
-            <div class="tab-header text-center">
-              <p>Menus</p>
-              <h3>Classiques</h3>
-            </div>
-
-            <div class="row gy-5">
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-1.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-1.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €5.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-2.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-2.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Aut Luia</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €14.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-3.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-3.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Est Eligendi</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €8.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-4.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-4.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-5.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-5.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-6.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-6.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Laboriosam Direva</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €9.95
-                </p>
-              </div><!-- Menu Item -->
-
-            </div>
-          </div><!-- End Lunch Menu Content -->
-
-          <div class="tab-pane fade" id="menu-dinner">
-
-            <div class="tab-header text-center">
-              <p>Menus</p>
-              <h3>Evénements</h3>
-            </div>
-
-            <div class="row gy-5">
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-1.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-1.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Magnam Tiste</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €5.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-2.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-2.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Aut Luia</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €14.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-3.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-3.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Est Eligendi</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €8.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-4.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-4.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-5.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-5.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Eos Luibusdam</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €12.95
-                </p>
-              </div><!-- Menu Item -->
-
-              <div class="col-lg-4 menu-item">
-                <a href="assets/img/menu/menu-item-6.png') }}" class="glightbox"><img src="{{ asset('assets/img/menu/menu-item-6.png') }}" class="menu-img img-fluid" alt=""></a>
-                <h4>Laboriosam Direva</h4>
-                <p class="ingredients">
-                  Lorem, deren, trataro, filede, nerada
-                </p>
-                <p class="price">
-                  €9.95
-                </p>
-              </div><!-- Menu Item -->
-
-            </div>
-          </div><!-- End Dinner Menu Content -->
-</section><!-- /Menu Section -->
+{% block javascripts %}
+    <script src="{{ asset('assets/js/filtres.js') }}"></script>
 {% endblock %}
