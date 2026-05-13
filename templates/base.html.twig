@@ -34,7 +34,7 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+      <a href="{{ path('app_home')}}" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1 class="sitename">V&G</h1>
@@ -44,20 +44,7 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="{{ path('app_home')}}">Accueil<br></a></li>
-<li class="dropdown"><a href="{{ path('app_menu')}}"><span>Nos Menus</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Tous les menus</a></li>
-              <li><a href="#">Menus de Noël</a></li>
-              <li><a href="#">Menus de Pâque</a></li>
-              <li><a href="#">Menus classiques</a></li>
-              <li><a href="#">Menus événements</a></li>
-                <ul>
-                  
-                </ul>
-              </li>   
-              
-            </ul>
-          </li>
+         <li><a href="{{ path('app_menu')}}">Nos Menus</a></li>
           <li><a href="{{ path('app_contact')}}">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -71,7 +58,7 @@
     </div>
   </header>
 
-    <main class="main">
+    <main class="main" style="margin-top: -30px;"> 
         {% block body %}{% endblock %}
     </main>
 

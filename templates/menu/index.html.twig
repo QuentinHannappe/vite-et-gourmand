@@ -3,7 +3,15 @@
 {% block title %}Nos Menus - Vite & Gourmand{% endblock %}
 
 {% block body %}
-<section class="section">
+
+<!-- Menu Section -->
+    <section id="menu" class="menu section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        
+
+<section class="section-first">
     <div class="container section-title">
         <p><span>Découvrez</span> <span class="description-title">Nos Menus</span></p>
     </div>
@@ -58,7 +66,7 @@
        <p class="card-text">{{ menu.description }}</p>
        <p><strong>Prix :</strong> {{ menu.prixParPersonne }}€ / personne</p>
        <p><strong>Minimum :</strong> {{ menu.personnesMin }} personnes</p>
-       <a href="#" class="btn-getstarted">Voir le détail</a>
+       <a href="{{ path('app_menu_detail', {'id': menu.id}) }}" class="btn-getstarted">Voir le détail</a>
     </div>
      </div>
       </div>

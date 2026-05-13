@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<!-- Chefs Section -->
+    <section id="chefs" class="chefs section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <p>{{ menu.titre }}</p>
+        <p><h2>{{ menu.description }}</h2></p>
+       <p><h2><strong>Prix :</strong> {{ menu.prixParPersonne }}€ / personne</h2></p2>
+       <p><h2><strong>Minimum :</strong> {{ menu.personnesMin }} personnes</h2></p2>
+       <p><h2><strong>Stock Disponible :</strong> {{ menu.quantiteRestante }}</h2></p2>
+       
+       <p><h2><strong>Régime :</strong>
+    {% for regime in menu.regimes %}
+              {{regime}}
+         {% endfor %}</h2></p>
+         
+     <a href="#" class="btn-getstarted">Commander</a>
+
+      </div>
+
+
+
+    </div>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+{% for plat in menu.plats %}
+          <div class="col-lg-4 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="{{asset(plat.photo)}}" class="img-fluid" alt="">
+                
+              </div>
+              <div class="member-info">
+                <h4>{{plat.titre}}</h4>
+                <span>{{plat.type}}</span>
+                <p>{{plat.description}}</p>
+              </div>
+            </div>
+          </div><!-- End Chef Team Member -->
+{% endfor %}
+
+    </div>
+<div/>
+
+
+{% endblock %}
