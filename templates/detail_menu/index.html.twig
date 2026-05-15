@@ -18,7 +18,15 @@
               {{regime}}
          {% endfor %}</h2></p>
          
-     <a href="#" class="btn-getstarted">Commander</a>
+     {% if app.user %}
+    <a href="{{ path('app_commande', {'id': menu.id}) }}" class="btn-getstarted">
+        Commander
+    </a>
+{% else %}
+    <a href="{{ path('app_login') }}" class="btn-getstarted">
+        Connectez-vous pour commander
+    </a>
+{% endif %}
 
       </div>
 

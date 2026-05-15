@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CommandeController!{% endblock %}
+
+{% block body %}
+
+    <div class="row justify-content-center">
+       <div class="col-4 mt-4 mb-4">
+    <h2>Commande</h2>
+
+    {{ form_errors(form) }}
+
+    {{ form_start(form) }}
+    {{ form_row(form.date_presta) }}
+    {{ form_row(form.heure_livraison) }}
+      <p><strong>Nom :</strong> {{ app.user.nom | capitalize }}</p>
+      <p><strong>Prénom :</strong> {{ app.user.prenom | capitalize }}</p>
+      <p><strong>Email :</strong> {{ app.user.email }}</p>
+      <p><strong>Téléphone :</strong> {{ app.user.telephone }}</p>
+    {{ form_row(form.adresse_livraison)}}
+    {{ form_row(form.nombre_personnes) }}
+    <p><strong>Prix par personne :</strong> {{ menu.prixParPersonne }}€</p>
+        <button type="submit" class="btn-getstarted mt-4 mb-4">Valider la commande</button>
+    {{ form_end(form) }}
+    
+    {% endblock %}
