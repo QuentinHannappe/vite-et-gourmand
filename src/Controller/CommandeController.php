@@ -32,10 +32,18 @@ final class CommandeController extends AbstractController
             $commande->setMenu($menu);
             $commande->setStatut('en attente');
             $commande->setPrixLivraison(0);
+            if ($user->getVille() == 'bordeaux'){
+              $commande->setPrixLivraison(0);
+            }
+             else $commande->setPrixLivraison(5);
+
             $commande->setPretMateriel(false);
             $commande->setRestitutionMateriel(false);
             $commande->setDateCommande(new \DateTime());
             $commande->setPrixMenu($menu->getPrixParPersonne() * $commande->getNombrePersonnes());
+            if ($commande->getNombrePersonnes() >= $menu->getPersonnesMin() +5){
+               $commande->setPrixMenu($menu->getPrixParPersonne() * $commande->getNombrePersonnes() *0.90);
+            }
             $entityManager->persist($commande);
             $entityManager->flush();
     }
