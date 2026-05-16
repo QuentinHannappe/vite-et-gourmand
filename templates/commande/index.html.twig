@@ -20,6 +20,8 @@
     {{ form_row(form.adresse_livraison)}}
     {{ form_row(form.nombre_personnes) }}
     <p><strong>Prix par personne :</strong> {{ menu.prixParPersonne }}€</p>
+    <p><strong>Réduction de 10%</strong> si vous commandez pour {{ menu.personnesMin + 5 }} personnes ou plus !</p>
+    <p><strong>Livraison gratuite</strong> à Bordeaux — <strong>5€</strong> ailleurs</p>
         <button type="submit" class="btn-getstarted mt-4 mb-4">Valider la commande</button>
     {{ form_end(form) }}
     

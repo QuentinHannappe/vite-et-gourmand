@@ -10,11 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
 
 final class CommandeController extends AbstractController
 {
     #[Route('/commande/{id}', name: 'app_commande')]
-    public function detail(int $id, MenuRepository $menuRepository, EntityManagerInterface $entityManager, Request $request): Response
+    public function detail(int $id, MenuRepository $menuRepository, EntityManagerInterface $entityManager, Request $request, MailerInterface $mailer): Response
     {
 
     $menu = $menuRepository->find($id);
@@ -46,8 +48,18 @@ final class CommandeController extends AbstractController
             }
             $entityManager->persist($commande);
             $entityManager->flush();
-    }
+            
+            $email = (new TemplatedEmail())
+    ->from('contact@vite-et-gourmand.fr')
+    ->to($user->getEmail())
+    ->subject('Confirmation de commande')
+    ->htmlTemplate('emails/confirmation.html.twig')
+    ->context(['commande' => $commande]);
 
+    $mailer->send($email);
+
+return $this->redirectToRoute('app_home');
+    }
        
         return $this->render('commande/index.html.twig', [
             'menu' => $menu,
