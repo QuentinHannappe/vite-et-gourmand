@@ -50,13 +50,13 @@ final class CommandeController extends AbstractController
             $entityManager->flush();
             
             $email = (new TemplatedEmail())
-    ->from('contact@vite-et-gourmand.fr')
-    ->to($user->getEmail())
-    ->subject('Confirmation de commande')
-    ->htmlTemplate('emails/confirmation.html.twig')
-    ->context(['commande' => $commande]);
+             ->from('contact@vite-et-gourmand.fr')
+             ->to($user->getEmail())
+             ->subject('Confirmation de commande')
+             ->htmlTemplate('emails/confirmation.html.twig')
+             ->context(['commande' => $commande]);
 
-    $mailer->send($email);
+            $mailer->send($email);
 
 return $this->redirectToRoute('app_home');
     }
