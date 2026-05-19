@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+
+<div class="row justify-content-center">
+       <div class="col-4 mt-4 mb-4">
+    <h2>Profil</h2>
+
+      <p><strong>Nom :</strong> {{ app.user.nom | capitalize }}</p>
+      <p><strong>Prénom :</strong> {{ app.user.prenom | capitalize }}</p>
+      <p><strong>Email :</strong> {{ app.user.email }}</p>
+      <p><strong>Téléphone :</strong> {{ app.user.telephone }}</p>
+<a href="{{ path('app_profil') }}" class="btn-getstarted">Modifier</a>
+
+<h3 class="mt-4">Mes commandes</h3>
+
+
+{% for commande in commande %}
+<div class="card mb-3">
+<div class="card-body">
+       <p><strong>Num commande : </strong>{{ commande.numeroCommande }}</p>
+       <p><strong>Statut : </strong>{{ commande.statut }}</p>
+       <p><strong>Date presta : </strong>{{ commande.datePresta | date('d/m/Y') }}</p>
+       <p><strong>Heure livraison : </strong>{{ commande.heureLivraison }}</p>
+       <p><strong>Menu : </strong>{{ commande.menu.titre }}</p>
+       <p><strong>Nbr de personnes : </strong>{{ commande.nombrePersonnes }}</p>
+       <p><strong>Prix total : </strong>{{ commande.prixMenu}}<strong>€</strong></p>
+       <p><strong>Prix livraison : </strong>{{ commande.prixLivraison }}</p>
+       {% if commande.statut == 'en attente' %}
+       <a href="{{ path('app_modifier_commande', {'id': commande.id}) }}">Modifier</a>
+       <a href="{{ path('app_annuler', {'id': commande.id}) }}">Annuler</a>
+       {% endif %}
+      </div>
+    </div>
+     {% endfor %}
+</div>
+{% endblock %}
