@@ -16,6 +16,16 @@ class CommandesRepository extends ServiceEntityRepository
         parent::__construct($registry, Commandes::class);
     }
 
+    public function findByClient(string $client): array
+    {
+    return $this->createQueryBuilder('c')
+        ->join('c.users', 'u')
+        ->andWhere('u.nom LIKE :client OR u.prenom LIKE :client')
+        ->setParameter('client', '%' . $client . '%')
+        ->getQuery()
+        ->getResult();
+}
+
     //    /**
     //     * @return Commandes[] Returns an array of Commandes objects
     //     */
