@@ -24,7 +24,7 @@ class CommandesRepository extends ServiceEntityRepository
         ->setParameter('client', '%' . $client . '%')
         ->getQuery()
         ->getResult();
-}
+    }
 
     //    /**
     //     * @return Commandes[] Returns an array of Commandes objects

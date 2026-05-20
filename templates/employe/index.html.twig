@@ -30,7 +30,9 @@
        <p><strong>Nbr de personnes : </strong>{{ commande.nombrePersonnes }}</p>
        <p><strong>Prix total : </strong>{{ commande.prixMenu}}<strong>€</strong></p>
        <p><strong>Prix livraison : </strong>{{ commande.prixLivraison }}</p>
-       <form method="POST" action="{{ path('app_statut', {'id': commande.id}) }}">
+
+
+    <form method="POST" action="{{ path('app_statut', {'id': commande.id}) }}">
     <select name="statut">
         <option value="accepté">Accepté</option>
         <option value="en préparation">En préparation</option>
@@ -39,9 +41,30 @@
         <option value="terminée">Terminée</option>
     </select>
     <p><button type="submit" class="btn-getstarted , mt-2">Valider le statut</button></p>
-</form>
+    </form>
       </div>
     </div>
      {% endfor %}
+
+<h3 class="mt-4">Avis en attente</h3>
+
+{% for avis in avis %}
+<div class="card mb-3">
+    <div class="card-body">
+        <p><strong>Note :</strong> {{ avis.note }}/5</p>
+        <p><strong>Commentaire :</strong> {{ avis.commentaire }}</p>
+        <p><strong>Client :</strong> {{ avis.commande.users.nom }} {{ avis.commande.users.prenom }}</p>
+        
+        <form method="POST" action="{{ path('app_valider_avis', {'id': avis.id}) }}">
+            <select name="statut">
+                <option value="validé">Valider</option>
+                <option value="refusé">Refuser</option>
+            </select>
+            <button type="submit" class="btn-getstarted mt-2">Confirmer</button>
+        </form>
+    </div>
+</div>
+{% endfor %}
+
 </div>
 {% endblock %}

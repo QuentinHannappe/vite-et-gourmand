@@ -10,6 +10,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ProfilType;
 use App\Form\CommandeType;
+use App\Form\AvisType;
+use App\Entity\Avis;
+
+
+
 
 
 
@@ -75,13 +80,37 @@ final class UserController extends AbstractController
             $entityManager->persist($commande);
             $entityManager->flush();
 
-return $this->redirectToRoute('app_profile');
+    return $this->redirectToRoute('app_profile');
     }
 
-return $this->render('user/modifier_commande.html.twig', [
-    'form' => $form,
-    'commande' => $commande,
-]);
+    return $this->render('user/modifier_commande.html.twig', [
+     'form' => $form,
+     'commande' => $commande,
+    ]);
+    }
+
+
+#[Route('/profile/commande/{id}/avis', name: 'app_avis')]
+public function avis(int $id, EntityManagerInterface $entityManager, CommandesRepository $commandesRepository, Request $request): Response
+{
+    $commande = $commandesRepository->find($id);
+    $avis = new Avis();
+    $form = $this->createForm(AvisType::class, $avis);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $avis->setCommande($commande);
+        $avis->setStatut('en attente');
+        $entityManager->persist($avis);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_profile');
+    }
+
+    return $this->render('user/avis.html.twig', [
+        'form' => $form,
+        'commande' => $commande,
+    ]);
 }
+
 
 }

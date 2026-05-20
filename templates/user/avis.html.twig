@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Laisser un avis{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+       <div class="col-6 mt-4 mb-4">
+
+    <h2>Laisser un avis</h2>
+    
+    {{ form_start(form) }}
+
+    {{ form_row(form.note) }}
+    {{ form_row(form.commentaire) }}
+
+        <button type="submit" class="btn-getstarted">Envoyer</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}

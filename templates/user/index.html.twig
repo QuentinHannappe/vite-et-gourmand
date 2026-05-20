@@ -28,9 +28,14 @@
        <p><strong>Nbr de personnes : </strong>{{ commande.nombrePersonnes }}</p>
        <p><strong>Prix total : </strong>{{ commande.prixMenu}}<strong>€</strong></p>
        <p><strong>Prix livraison : </strong>{{ commande.prixLivraison }}</p>
+       
        {% if commande.statut == 'en attente' %}
        <a href="{{ path('app_modifier_commande', {'id': commande.id}) }}">Modifier</a>
        <a href="{{ path('app_annuler', {'id': commande.id}) }}">Annuler</a>
+       {% endif %}
+
+       {% if commande.statut == 'terminée' %}
+       <a href="{{ path('app_avis', {'id': commande.id}) }}" class="btn-getstarted">Laisser un avis</a>
        {% endif %}
       </div>
     </div>

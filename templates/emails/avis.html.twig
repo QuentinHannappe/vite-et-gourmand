@@ -1,0 +1,54 @@
+<html>
+<body style="font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 20px;">
+    
+    <table width="600" style="margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden;">
+        
+        <tr>
+            <td style="background-color: #1c874a; padding: 30px; text-align: center;">
+                <h1 style="color: #ffffff; margin: 0;">Vite & Gourmand</h1>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="padding: 30px;">
+                <h2>Avis</h2>
+                <p>Bonjour {{ user.prenom }},</p>
+                <p>Votre avis nous intérresse !</p>
+    </table>
+                <table width="100%" style="background-color: #f5f5f5; border-radius: 8px; padding: 20px;">
+                <tr>
+
+                <p>Donnez nous votre avis sur votre commande !</p>
+
+
+                        <td><strong>Numéro :</strong></td>
+                        <td>{{ commande.numeroCommande }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Menu :</strong></td>
+                        <td>{{ commande.menu.titre }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Date :</strong></td>
+                        <td>{{ commande.datePresta | date('d/m/Y') }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Personnes :</strong></td>
+                        <td>{{ commande.nombrePersonnes }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prix total :</strong></td>
+                        <td>{{ commande.prixMenu }}€</td>
+                    </tr>
+            </td>
+        </tr>
+        
+        <tr>
+            <td style="background-color: #1a1a1a; padding: 20px; text-align: center; color: #ffffff;">
+                <p style="margin: 0;">L'équipe Vite & Gourmand — Bordeaux</p>
+            </td>
+        </tr>
+        
+    </table>
+</body>
+</html>
