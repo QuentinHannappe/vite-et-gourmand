@@ -34,6 +34,16 @@
           </div><!-- End Info Item -->
 
           <div class="col-md-6">
+            <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="500">
+              <i class="icon bi bi-clock flex-shrink-0"></i>
+              <div>
+                <h3>Horaires<br></h3>
+                <p><strong>Du Mardi au Dimanche:</strong> 11h00 - 22h00; <strong>Lundi:</strong> Fermé</p>
+              </div>
+            </div>
+          </div><!-- End Info Item -->
+
+          <div class="col-md-6">
             <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="300">
               <i class="icon bi bi-telephone flex-shrink-0"></i>
               <div>
@@ -52,49 +62,32 @@
               </div>
             </div>
           </div><!-- End Info Item -->
-
-          <div class="col-md-6">
-            <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="500">
-              <i class="icon bi bi-clock flex-shrink-0"></i>
-              <div>
-                <h3>Horaires<br></h3>
-                <p><strong>Du Mardi au Dimanche:</strong> 11h00 - 22h00; <strong>Lundi:</strong> Fermé</p>
-              </div>
-            </div>
-          </div><!-- End Info Item -->
-
+         
         </div>
 
-        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="600">
-          <div class="row gy-4">
 
-            <div class="col-md-6">
-              <input type="text" name="name" class="form-control" placeholder="Votre Nom" required="">
-            </div>
-
-            <div class="col-md-6 ">
-              <input type="email" class="form-control" name="email" placeholder="Votre Email" required="">
-            </div>
-
-            <div class="col-md-12">
-              <input type="text" class="form-control" name="subject" placeholder="Sujet" required="">
-            </div>
-
-            <div class="col-md-12">
-              <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-            </div>
-
-            <div class="col-md-12 text-center">
-              <div class="loading">Chargement</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Votre message à été envoyé. Merci!</div>
-
-              <button type="submit">Envoyer</button>
-            </div>
-
-          </div>
-        </form><!-- End Contact Form -->
-
+<div class="col-md-12 mt-4">
+            <div class="info-item d-flex align-items-center" data-aos="fade-up" data-aos-delay="500">
+              
+        {{ form_start(form, {'action': path('app_contact'), 'method': 'POST'}) }}
+<div class="row gy-4">
+    <div class="col-md-6">
+        {{ form_row(form.nom) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_row(form.email) }}
+    </div>
+    <div class="col-md-12">
+        {{ form_row(form.titre) }}
+    </div>
+    <div class="col-md-12">
+        {{ form_row(form.description) }}
+    </div>
+    <div class="col-md-12 text-center">
+        <button type="submit" class="btn-getstarted">Envoyer</button>
+    </div>
+</div>
+{{ form_end(form) }}
       </div>
 
     </section><!-- /Contact Section -->

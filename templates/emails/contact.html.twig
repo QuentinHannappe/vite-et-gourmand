@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <body style="font-family: Arial, sans-serif; background-color: #f5f5f5; margin: 0; padding: 20px;">
     
@@ -11,41 +12,34 @@
         
         <tr>
             <td style="padding: 30px;">
-                <h2>Avis</h2>
-                <p>Bonjour {{ user.prenom }},</p>
-                <p>Votre avis nous intérresse !</p>
-    </table>
+                <h2>Contact client</h2>
+                
                 <table width="100%" style="background-color: #f5f5f5; border-radius: 8px; padding: 20px;">
-                <tr>
-
-                <p>Donnez nous votre avis sur votre commande !</p>
-
-
-                        <td><strong>Numéro :</strong></td>
-                        <td>{{ commande.numeroCommande }}</td>
+                    <tr>
+                        <td><strong>Nom :</strong></td>
+                        <td>{{ nom }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Menu :</strong></td>
-                        <td>{{ commande.menu.titre }}</td>
+                        <td><strong>Email :</strong></td>
+                        <td>{{ emailClient }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Date :</strong></td>
-                        <td>{{ commande.datePresta | date('d/m/Y') }}</td>
+                        <td><strong>Titre :</strong></td>
+                        <td>{{ titre }}</td>
                     </tr>
                     <tr>
-                        <td><strong>Personnes :</strong></td>
-                        <td>{{ commande.nombrePersonnes }}</td>
+                        <td><strong>Message :</strong></td>
+                        <td>{{ description }}</td>
                     </tr>
-                    <tr>
-                        <td><strong>Prix total :</strong></td>
-                        <td>{{ commande.prixMenu }}€</td>
-                    </tr>
+                        
+                </table>
+                
             </td>
         </tr>
         
         <tr>
             <td style="background-color: #1a1a1a; padding: 20px; text-align: center; color: #ffffff;">
-                <p style="margin: 0;">L'équipe Vite & Gourmand, Bordeaux</p>
+                <p style="margin: 0;">Vite & Gourmand</p>
             </td>
         </tr>
         
