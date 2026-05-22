@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon profil{% endblock %}
+
+{% block body %}
+<div class="container mt-4 mb-4">
+    <h2>Ajouter un employé</h2>
+    
+    {{ form_start(form) }}
+
+    {{ form_row(form.email) }}
+    {{ form_row(form.password) }}
+
+        <button type="submit" class="btn-getstarted">Creer</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}
