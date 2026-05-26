@@ -51,7 +51,13 @@
       </nav>
 
 {% if app.user %}
-    <a class="btn-getstarted" href="#">Mon Espace</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn-getstarted" href="{{ path('app_admin') }}">Mon Espace</a>
+    {% elseif is_granted('ROLE_EMPLOYE') %}
+        <a class="btn-getstarted" href="{{ path('app_employe') }}">Mon Espace</a>
+    {% else %}
+        <a class="btn-getstarted" href="{{ path('app_profile') }}">Mon Espace</a>
+    {% endif %}
 {% else %}
     <a class="btn-getstarted" href="{{ path('app_login') }}">Connexion</a>
 {% endif %}

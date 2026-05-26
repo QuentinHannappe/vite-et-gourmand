@@ -44,6 +44,7 @@ security:
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/commande, roles: ROLE_USER }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/gestionmenu, roles: ROLE_EMPLOYE }
 when@test:
     security:
         password_hashers:
