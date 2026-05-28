@@ -68,6 +68,7 @@
 
 <h3 class="mt-4">Employés</h3>
 
+<p><a href="{{ path('app_creer_employe') }}" class="btn-getstarted mb-5">Créer un employé</a></p>
 
 {% for employe in employes %}
     {% if 'ROLE_EMPLOYE' in employe.roles %}
