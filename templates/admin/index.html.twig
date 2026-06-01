@@ -1,10 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Employé{% endblock %}
+{% block title %}Admin{% endblock %}
 
 {% block body %}
 <div class="row justify-content-center">
 <div class="col-7 mt-4 mb-4">
+
+<div class="container mt-3">
+<form method="GET">
+    <select name="menu_id">
+        <option value="">Tous les menus</option>
+        {% for menu in menus %}
+    <option value="{{ menu.id }}">{{ menu.titre }}</option>
+{% endfor %}
+    </select>
+    
+    <input type="date" name="date_debut" value="{{ app.request.query.get('date_debut') }}">
+    <input type="date" name="date_fin" value="{{ app.request.query.get('date_fin') }}">
+    
+    <button type="submit" class="btn-getstarted">Filtrer</button>
+</form>
+
+
+<h3>Graphique des commandes par menu</h3>
+<canvas id="commandesChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx = document.getElementById('commandesChart');
+
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for stat in statsParMenu %}'{{ stat.titre }}',{% endfor %}],
+        datasets: [{
+            label: 'Prix total (€)',
+            data: [{% for stat in statsParMenu %}{{ stat.chiffreAffaires }},{% endfor %}],
+            backgroundColor: '#1c874a',
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Commandes par menu'
+            }
+        }
+    }
+});
+
+</script>
+
+<h3 class="mt-4">Chiffre d'affaires par menu</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Menu</th>
+            <th>Nombre de commandes</th>
+            <th>Chiffre d'affaires</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in statsParMenu %}
+        <tr>
+            <td>{{ stat.titre }}</td>
+            <td>{{ stat.nombreCommandes }}</td>
+            <td>{{ stat.chiffreAffaires }}€</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 <h3 class="mt-4">Commandes</h3>
 
 <form method="GET">

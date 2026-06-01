@@ -12,11 +12,14 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Document\StatistiquesCommandes;
+
 
 final class CommandeController extends AbstractController
 {
     #[Route('/commande/{id}', name: 'app_commande')]
-    public function detail(int $id, MenuRepository $menuRepository, EntityManagerInterface $entityManager, Request $request, MailerInterface $mailer): Response
+    public function detail(int $id, MenuRepository $menuRepository, EntityManagerInterface $entityManager, Request $request, MailerInterface $mailer, DocumentManager $documentManager): Response
     {
 
     $menu = $menuRepository->find($id);
@@ -49,6 +52,14 @@ final class CommandeController extends AbstractController
             $entityManager->persist($commande);
             $entityManager->flush();
             
+            $stat = new StatistiquesCommandes();
+            $stat->setTitre($menu->getTitre());
+            $stat->setPrixtotal($commande->getPrixMenu());
+            $stat->setDateCommande(new \DateTime());
+            $stat->setMenuId($menu->getId());
+            $documentManager->persist($stat);
+            $documentManager->flush();
+
             $email = (new TemplatedEmail())
              ->from('contact@vite-et-gourmand.fr')
              ->to($user->getEmail())

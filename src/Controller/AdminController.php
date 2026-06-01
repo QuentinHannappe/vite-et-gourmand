@@ -16,6 +16,10 @@ use App\Repository\AvisRepository;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Form\EmployeType;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use App\Document\StatistiquesCommandes;
+use App\Repository\MenuRepository;
+
 
 
 
@@ -24,12 +28,38 @@ use App\Form\EmployeType;
 final class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(CommandesRepository $commandesRepository, Request $request, Avisrepository $avisRepository, UserRepository $userRepository): Response
+    public function index(CommandesRepository $commandesRepository, Request $request, Avisrepository $avisRepository, UserRepository $userRepository, DocumentManager $documentManager, MenuRepository $menuRepository): Response
     {
     $statut = $request->query->get('statut');
     $client = $request->query->get('client');
     $employes = $userRepository->findAll();
+    
+    $menuId = $request->query->get('menu_id');
+    $dateDebut = $request->query->get('date_debut');
+    $dateFin = $request->query->get('date_fin');
 
+    $builder = $documentManager->getRepository(StatistiquesCommandes::class)
+    ->createAggregationBuilder();
+
+    if ($menuId) {
+    $builder->match()->field('menuId')->equals((int)$menuId);
+    }
+    
+    if ($dateDebut && $dateFin) {
+     $builder->match()
+        ->field('date_commande')
+        ->gte(new \DateTime($dateDebut))
+        ->lte(new \DateTime($dateFin));
+}
+
+    $statsParMenu = $builder
+    ->group()
+        ->field('id')->expression('$menuId')
+        ->field('titre')->first('$titre')
+        ->field('nombreCommandes')->sum(1)
+        ->field('chiffreAffaires')->sum('$prix_total')
+    ->execute()
+    ->toArray();
 
     if ($statut) {
     $commandes = $commandesRepository->findBy(['statut' => $statut]);
@@ -47,7 +77,9 @@ final class AdminController extends AbstractController
             'client' => $client,
             'commandes' => $commandes,
             'avis' => $avis,
-            'employes' => $employes
+            'employes' => $employes,
+            'statsParMenu' => $statsParMenu,
+            'menus' => $menuRepository->findAll(),
         ]);
     }
 
@@ -142,6 +174,6 @@ final class AdminController extends AbstractController
 
      return $this->redirectToRoute('app_admin');
     }
-
-
+ 
+    
 }
