@@ -3,6 +3,11 @@ Vite & Gourmand
 Application web de commande de menus traiteur pour l'entreprise Vite & Gourmand, basée à Bordeaux.
 Elle permet aux clients de consulter et commander des menus en ligne.
 
+Documents
+- [Manuel utilisateur](docs/manuel-utilisateur.pdf)
+- [Charte graphique](docs/charte-graphique.pdf)
+- [Documentation technique](docs/documentation-technique.pdf)
+
 
 Prérequis:
 - PHP 8.x
@@ -73,10 +78,10 @@ Utilisateur: client@test.fr , Mot de passe: client
 
 
 Technologies utilisées
-- Symfony 7 — Framework PHP back-end
-- MySQL — Base de données relationnelle
-- Bootstrap 5 — Framework CSS front-end
-- EasyAdmin — Interface d'administration CRUD
-- Symfony Mailer — Envoi d'emails automatiques
-- Mailtrap — Interception des emails en développement
-- Symfonycasts Reset Password Bundle — Réinitialisation de mot de passe
+- Symfony 7: Framework PHP back-end
+- MySQL:  Base de données relationnelle
+- Bootstrap: Framework CSS front-end
+- EasyAdmin: Interface d'administration CRUD
+- Symfony Mailer: Envoi d'emails automatiques
+- Mailtrap: Interception des emails en développement
+- Symfonycasts Reset Password Bundle: Réinitialisation de mot de passe
