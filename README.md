@@ -74,7 +74,7 @@ Identifiants de test:
 
 Administrateur: jose@admin.fr , Mot de passe: Admin@jose
 Employé: employe@test.fr , Mot de passe: employe
-Utilisateur: client@test.fr , Mot de passe: client
+Utilisateur: client@test.fr , Mot de passe: Client@1234
 
 
 Technologies utilisées
