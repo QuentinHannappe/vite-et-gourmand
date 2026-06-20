@@ -17,14 +17,37 @@ Prérequis:
 - Git
 
 
-Installation:
+Lancer avec Docker:
+
+Si vous avez Docker installé, vous pouvez lancer l'application sans installer PHP ni MySQL :
 
 1 Cloner le projet
 git clone git@github.com:QuentinHannappe/vite-et-gourmand.git
 cd vite-et-gourmand
 
+2 Lancer Docker
+docker-compose up
 
-2 Installer les dépendances
+L'application sera accessible sur http://localhost:8080
+
+La base de données est automatiquement importée au démarrage.
+
+Identifiants de test :
+Administrateur: jose@admin.fr , Mot de passe: Admin@jose
+Employé: employe@test.fr , Mot de passe: employe
+Utilisateur: client@test.fr , Mot de passe: Client@1234
+
+
+
+
+Installation sans Docker:
+
+1 Cloner le projet: 
+git clone git@github.com:QuentinHannappe/vite-et-gourmand.git
+cd vite-et-gourmand
+
+
+2 Installer les dépendances:
 Le dossier vendor/ qui contient toutes les librairies Symfony n'est pas sur GitHub, la commande si dessous le recréer depuis le fichier composer.json :
 
 composer install
