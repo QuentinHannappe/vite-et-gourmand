@@ -13,7 +13,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 WORKDIR /app
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader --no-scripts --ignore-platform-req=ext-mongodb
+RUN composer install --optimize-autoloader --no-scripts --ignore-platform-req=ext-mongodb
 
 ENV APP_ENV=prod
 

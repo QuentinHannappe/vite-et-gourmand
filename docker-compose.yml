@@ -8,13 +8,15 @@ services:
     environment:
       APP_ENV: dev
       APP_SECRET: changeme
+      DEFAULT_URI: http://localhost:8080
       DATABASE_URL: mysql://root:root@db:3306/vite_et_gourmand
       MONGODB_URI: mongodb://mongo:27017
       MONGODB_DB: vite_et_gourmand
-      MAILER_DSN: null://null
+      MAILER_DSN: smtp://mailer:1025
     depends_on:
       - db
       - mongo
+      - mailer
 
   db:
     image: mysql:8.0
@@ -22,7 +24,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: vite_et_gourmand
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - ./database/vite_et_gourmand.sql:/docker-entrypoint-initdb.d/init.sql
 
@@ -30,3 +32,15 @@ services:
     image: mongo:6.0
     ports:
       - "27017:27017"
+
+  mailer:
+    image: axllent/mailpit
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+volumes:
+  db_data:
