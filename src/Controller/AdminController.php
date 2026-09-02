@@ -168,6 +168,7 @@ final class AdminController extends AbstractController
     {
         $user = $userRepository->find($id);
         $user->setIsActive(false);
+        $user->setRoles([]);
 
             $entityManager->persist($user);
             $entityManager->flush();
