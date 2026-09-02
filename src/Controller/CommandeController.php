@@ -37,7 +37,8 @@ final class CommandeController extends AbstractController
             $commande->setMenu($menu);
             $commande->setStatut('en attente');
             $commande->setPrixLivraison(0);
-            if ($user->getVille() == 'bordeaux'){
+            if (strtolower($user->getVille()) === 'bordeaux')
+                {
               $commande->setPrixLivraison(0);
             }
              else $commande->setPrixLivraison(5);
