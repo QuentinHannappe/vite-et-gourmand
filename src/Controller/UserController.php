@@ -52,6 +52,19 @@ final class UserController extends AbstractController
     public function annuler(int $id, EntityManagerInterface $entityManager, CommandesRepository $commandesRepository): Response
     {
         $commande = $commandesRepository->find($id);
+
+        if (!$commande) {
+        throw $this->createNotFoundException();
+        }
+
+        if ($commande->getUsers() !== $this->getUser()) {
+        throw $this->createAccessDeniedException();
+        }
+
+        if ($commande->getStatut() !== 'en attente') {
+        throw $this->createAccessDeniedException();
+        }
+
         $commande->setStatut('Annulée');
 
             $entityManager->persist($commande);
@@ -64,8 +77,19 @@ final class UserController extends AbstractController
     #[Route('/commande/{id}/modifier', name: 'app_modifier_commande')]
     public function modifier(int $id, CommandesRepository $commandesRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
-    $user = $this->getUser();
     $commande = $commandesRepository->find($id);
+
+    if (!$commande) {
+        throw $this->createNotFoundException();
+        }
+
+        if ($commande->getUsers() !== $this->getUser()) {
+        throw $this->createAccessDeniedException();
+        }
+
+        if ($commande->getStatut() !== 'en attente') {
+        throw $this->createAccessDeniedException();
+        }
     
     $form = $this->createForm(CommandeType::class, $commande);
         $form->handleRequest($request);
@@ -94,6 +118,17 @@ final class UserController extends AbstractController
 public function avis(int $id, EntityManagerInterface $entityManager, CommandesRepository $commandesRepository, Request $request): Response
 {
     $commande = $commandesRepository->find($id);
+    if (!$commande) {
+        throw $this->createNotFoundException();
+        }
+
+        if ($commande->getUsers() !== $this->getUser()) {
+        throw $this->createAccessDeniedException();
+        }
+
+        if ($commande->getStatut() !== 'terminée') {
+        throw $this->createAccessDeniedException();
+        }
     $avis = new Avis();
     $form = $this->createForm(AvisType::class, $avis);
     $form->handleRequest($request);

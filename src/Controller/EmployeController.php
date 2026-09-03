@@ -42,7 +42,7 @@ final class EmployeController extends AbstractController
         ]);
     }
 
-    #[Route('/profile/commande/{id}/statut', name: 'app_statut')]
+    #[Route('/employe/commande/{id}/statut', name: 'app_statut')]
     public function changerStatut(int $id, EntityManagerInterface $entityManager, CommandesRepository $commandesRepository, Request $request, MailerInterface $mailer): Response
     {
         $commande = $commandesRepository->find($id);
