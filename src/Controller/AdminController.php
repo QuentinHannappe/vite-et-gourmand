@@ -82,44 +82,6 @@ final class AdminController extends AbstractController
             'menus' => $menuRepository->findAll(),
         ]);
     }
-
-    #[Route('/profile/commande/{id}/statut', name: 'app_statut')]
-    public function changerStatut(int $id, EntityManagerInterface $entityManager, CommandesRepository $commandesRepository, Request $request, MailerInterface $mailer): Response
-    {
-        $commande = $commandesRepository->find($id);
-        $statut = $request->request->get('statut');
-        $commande->setStatut($statut);
-
-            $entityManager->persist($commande);
-            $entityManager->flush();
-
-    if ($statut == 'terminée') {
-    $user = $commande->getUsers();
-    $email = (new TemplatedEmail())
-             ->from('contact@vite-et-gourmand.fr')
-             ->to($user->getEmail())
-             ->subject('Laissez un avis')
-             ->htmlTemplate('emails/avis.html.twig')
-             ->context(['user' => $user, 'commande' => $commande]);
-            $mailer->send($email);
-    }
-     return $this->redirectToRoute('app_admin');
-    }
-
-
-
-    #[Route('/admin/avis/{id}/statut', name: 'app_valider_avis')]
-    public function validerAvis(int $id, AvisRepository $avisRepository, Request $request, EntityManagerInterface $entityManager, CommandesRepository $commandesRepository): Response
-    {
-    $avis = $avisRepository->find($id);
-    $statut = $request->request->get('statut');
-    $avis->setStatut($statut);
-    $entityManager->persist($avis);
-    $entityManager->flush();
-    return $this->redirectToRoute('app_admin');
-    }
-
-    
     
     #[Route('/admin/employe/creer', name: 'app_creer_employe')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, Security $security, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
