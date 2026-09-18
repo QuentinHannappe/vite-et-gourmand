@@ -72,19 +72,14 @@ Copiez votre MAILER_DSN et remplacez la ligne correspondante dans le fichier .en
 
 
 4 Créer la base de données
-Créez une base de données MySQL nommée vite_et_gourmand depuis le terminal :
+Importez le fichier SQL fourni dans le dossier database/ :
 
-mysql -u root -p
-CREATE DATABASE vite_et_gourmand;
+mysql -u root -p < database/vite_et_gourmand.sql
 
+Le script crée la base vite_et_gourmand, ses 14 tables avec leurs contraintes, et insère un jeu de données de test : menus, plats, thèmes, régimes, allergènes, commandes, avis et trois comptes utilisateurs.
 si votre nom d'utilisateur MySQL n'est pas root, remplacez root par votre nom d'utilisateur.
 
-Puis importez le fichier SQL fourni dans le dossier database/ :
-
-mysql -u root -p vite_et_gourmand < database/vite_et_gourmand.sql
-
-Ce fichier contient toute la structure des tables ainsi que les données de test (menus, plats, thèmes, régimes, allergènes et un compte administrateur).
-
+Le dossier database/ contient également donnees_postgres.sql. Ce fichier n'est pas nécessaire à l'installation locale : il sert uniquement au déploiement sur fly.io, où la base est PostgreSQL et où les tables sont créées par les entités Doctrine. Il ne contient donc que les insertions de données, adaptées à la syntaxe PostgreSQL.
 
 5 Lancer le serveur
 
