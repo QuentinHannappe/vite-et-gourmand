@@ -1,9 +1,4 @@
 -- Vite & Gourmand : jeu de donnees pour PostgreSQL
--- Les tables existent deja (creees par Doctrine a partir des entites).
--- Adaptations par rapport a la version MySQL :
---   "user" entre guillemets : mot reserve en PostgreSQL
---   true / false au lieu de 1 / 0 pour les booleens
-
 
 INSERT INTO "user" (email, roles, password, nom, prenom, telephone, adresse, ville, pays, is_active) VALUES
 ('jose@admin.fr',    '["ROLE_ADMIN"]',   '$2y$13$W5MXilPiWUofmobB/0g/0enhlWVMrilEkl77PCiW6PFwUuw.nwRue', 'Proprietaire', 'Jose',  '0600000000', '1 rue de la Paix', 'bordeaux', 'France', true),
