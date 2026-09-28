@@ -23,7 +23,7 @@ class CreateAdminCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $admin = new User();
-        $admin->setEmail('admin@vite-gourmand.fr');
+        $admin->setEmail('jose@admin.fr');
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setNom('Admin');
         $admin->setPrenom('jose');
