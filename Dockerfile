@@ -1,7 +1,7 @@
 FROM php:8.4-cli
 
 RUN apt-get update && apt-get install -y \
-    git zip unzip curl libssl-dev pkg-config libpq-dev \
+    git zip unzip curl libssl-dev pkg-config libpq-dev ca-certificates\
     && pecl install mongodb \
     && docker-php-ext-enable mongodb \
     && docker-php-ext-install pdo pdo_mysql pdo_pgsql
