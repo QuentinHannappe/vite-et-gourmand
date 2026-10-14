@@ -1,6 +1,7 @@
 -- Vite & Gourmand : creation de la base et jeu de donnees
 
-CREATE DATABASE vite_et_gourmand
+SET NAMES utf8mb4;
+CREATE DATABASE IF NOT EXISTS vite_et_gourmand
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
@@ -155,19 +156,11 @@ CREATE TABLE plat_allergenes (
     CONSTRAINT fk_plat_allergenes_allergene
         FOREIGN KEY (allergenes_id) REFERENCES allergenes (id) ON DELETE CASCADE
 );
+
 -- Jeu de donnees
---
--- Les identifiants sont indiques explicitement pour que les cles etrangeres
--- restent coherentes entre les tables.
--- Les mots de passe sont des hachages bcrypt, jamais du texte en clair.
--- Les coordonnees personnelles ont ete remplacees par des valeurs de test.
 
 INSERT INTO user (id, email, roles, password, nom, prenom, telephone, adresse, ville, pays, is_active) VALUES
 (1, 'jose@admin.fr',               '["ROLE_ADMIN"]',   '$2y$13$W5MXilPiWUofmobB/0g/0enhlWVMrilEkl77PCiW6PFwUuw.nwRue', 'proprietaire', 'jose',   '0600000000', '1 rue de la paix', 'bordeaux', 'france', 1),
-(3, 'client1@test.fr',             '["ROLE_USER"]',    '$2y$13$N4an3QNov77NdPiV2jcY1uPXT48N9zrzlWPTLUXKN0.q5hvl1YaBq', 'MARTIN',       'Claire', '0600000001', '541 route de la tour', 'SCIEZ',   'France', 1),
-(4, 'client2@test.fr',             '["ROLE_USER"]',    '$2y$13$PNtGsdbWwjM.Zi2KpqVYBeDK0WKl1eKFiBKYTjpKxyFOClKj0Kvae', 'DURAND',       'Paul',   '0600000002', '541 route de la tour', 'SCIEZ',   'France', 1),
-(5, 'client3@test.fr',             '["ROLE_USER"]',    '$2y$13$8f19u9KX.N/UVFiUf0G91uyfaFC0TyBuNuFzjZ87p7sh/ooqgh.h2', 'PETIT',        'Lea',    '0600000003', '541 route de la tour', 'SCIEZ',   'France', 1),
-(6, 'employe@viteetgourmand.com',  '["ROLE_EMPLOYE"]', '$2y$13$jedtBnHGg205PfJMnwflgO.1AJO/J4Qac1kVmWNM5rpmcgKS/7b1O', '', '', '', '', '', '', 0),
 (7, 'employe@test.fr',             '["ROLE_EMPLOYE"]', '$2y$13$VRHC4Gj49E.PbOYpEScL7eyhkmicHMojBkZY4.x/603uOmoMWV9ua', '', '', '', '', '', '', 1),
 (8, 'client@test.fr',              '["ROLE_USER"]',    '$2y$13$i3P5cgPOClisY9IdLOMBOu/dCkcq7yFw3r.yPTkf25zhU6Jfcy0Ri', 'Client', 'Test', '0600000000', '1 rue de la paix', 'Bordeaux', 'France', 1);
 
