@@ -54,6 +54,16 @@ INSERT INTO menu_regime (menu_id, regime_id) VALUES
 (3, 1),
 (4, 1);
 
+INSERT INTO plat_allergenes (plat_id, allergenes_id) VALUES
+(1, 1),
+(2, 2),
+(3, 1), (3, 2), (3, 4), (3, 5),
+(5, 1), (5, 2), (5, 3), (5, 4),
+(6, 1), (6, 2), (6, 4),
+(7, 2), (7, 3),
+(8, 2),
+(9, 2), (9, 4);
+
 INSERT INTO commandes (id, numero_commande, date_commande, date_presta, heure_livraison, adresse_livraison, prix_menu, nombre_personnes, prix_livraison, statut, pret_materiel, restitution_materiel, users_id, menu_id) VALUES
 (18, '6a0829c4af495', '2026-05-16 08:24:36', '2026-05-22', '10:00', '1 rue de la paix, bordeaux',  850.0, 10, 0, 'terminée',   false, false, 1, 1),
 (19, '6a082acc72c7b', '2026-05-16 08:29:00', '2026-05-22', '13:00', '1 rue de la paix, bordeaux', 1147.5, 15, 0, 'terminée',   false, false, 1, 1),

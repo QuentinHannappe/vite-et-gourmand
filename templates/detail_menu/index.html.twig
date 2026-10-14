@@ -9,10 +9,10 @@
       <div class="container section-title" data-aos="fade-up">
         <p>{{ menu.titre }}</p>
         <p><h2>{{ menu.description }}</h2></p>
-       <p><h2><strong>Prix :</strong> {{ menu.prixParPersonne }}€ / personne</h2></p>
-       <p><h2><strong>Minimum :</strong> {{ menu.personnesMin }} personnes</h2></p>
-       <p><h2><strong>Stock Disponible :</strong> {{ menu.quantiteRestante }}</h2></p>
-       
+        <p><h2><strong>Conditions :</strong> {{ menu.conditions }}</h2></p>
+        <p><h2><strong>Prix :</strong> {{ menu.prixParPersonne }}€ / personne</h2></p>
+        <p><h2><strong>Minimum :</strong> {{ menu.personnesMin }} personnes</h2></p>
+        <p><h2><strong>Stock Disponible :</strong> {{ menu.quantiteRestante }}</h2></p>       
        <p><h2><strong>Régime :</strong>
     {% for regime in menu.regimes %}
               {{regime}}
@@ -50,6 +50,12 @@
                 <h4>{{plat.titre}}</h4>
                 <span>{{plat.type}}</span>
                 <p>{{plat.description}}</p>
+                <strong>Allergènes :</strong>
+                 {% for allergene in plat.allergenes %}
+                 {{ allergene.libelle }}{% if not loop.last %}, {% endif %}
+                 {% else %}
+                  aucun
+                 {% endfor %}
               </div>
             </div>
           </div><!-- End Chef Team Member -->
