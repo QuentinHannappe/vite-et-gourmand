@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use Override;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -28,5 +30,19 @@ class SecurityController extends AbstractController
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+    }
+
+    #[Route('/redirection', name: 'app_redirection')]
+    public function redirection(): Response
+    {
+        if ($this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('app_admin');
+        }
+
+        if ($this->isGranted('ROLE_EMPLOYE')) {
+            return $this->redirectToRoute('app_employe');
+        }
+
+        return $this->redirectToRoute('app_profile');
     }
 }
