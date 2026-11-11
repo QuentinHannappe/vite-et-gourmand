@@ -9,13 +9,16 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 
 #[AsCommand(name: 'app:create-admin')]
 class CreateAdminCommand extends Command
 {
     public function __construct(
         private EntityManagerInterface $em,
-        private UserPasswordHasherInterface $hasher
+        private UserPasswordHasherInterface $hasher,
+        #[Autowire(env: 'ADMIN_EMAIL')] private string $adminEmail,
+        #[Autowire(env: 'ADMIN_PASSWORD')] private string $adminPassword
     ) {
         parent::__construct();
     }
@@ -23,7 +26,7 @@ class CreateAdminCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $admin = new User();
-        $admin->setEmail('jose@admin.fr');
+        $admin->setEmail($this->adminEmail);
         $admin->setRoles(['ROLE_ADMIN']);
         $admin->setNom('Admin');
         $admin->setPrenom('jose');
@@ -33,7 +36,7 @@ class CreateAdminCommand extends Command
         $admin->setPays('France');
         $admin->setIsActive(true);
 
-        $password = $this->hasher->hashPassword($admin, 'Admin@jose');
+        $password = $this->hasher->hashPassword($admin, $this->adminPassword);
         $admin->setPassword($password);
 
         $this->em->persist($admin);
