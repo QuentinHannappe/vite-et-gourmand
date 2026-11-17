@@ -71,15 +71,6 @@ CREATE TABLE menu (
         FOREIGN KEY (theme_id) REFERENCES theme (id)
 );
 
-CREATE TABLE image (
-    id      INT AUTO_INCREMENT PRIMARY KEY,
-    chemin  VARCHAR(255) NOT NULL,
-    menu_id INT          NOT NULL,
-    CONSTRAINT fk_image_menu
-        FOREIGN KEY (menu_id) REFERENCES menu (id)
-        ON DELETE CASCADE
-);
-
 CREATE TABLE commandes (
     id                   INT AUTO_INCREMENT PRIMARY KEY,
     numero_commande      VARCHAR(50)  NOT NULL,
